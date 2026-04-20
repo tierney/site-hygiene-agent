@@ -18,16 +18,26 @@ Traditional tools stop at "Broken Link." The **Site-Hygiene-Agent** executes a d
 ## Implementation Roadmap
 
 ### Module 1: The Scout
-A Playwright-based crawler focusing on external redirects and cross-platform consistency (YouTube headers, Social Media descriptions).
+**Discovery Layer:** Focuses on external redirects and structural consistency.
+- **Implementation:** 
+    - `_agents/skills/site-hygiene/scripts/audit-links.sh` (Crawl & Redirect Check)
+    - `_agents/skills/site-hygiene/scripts/check-domains.sh` (WHOIS & DNS Monitoring)
 
 ### Module 2: The Auditor
-An LLM-driven evaluator for content-mismatch detection. It flags when a redirected domain no longer represents the organization's values.
+**Analysis Layer:** LLM-evaluator for content-mismatch and mission-drift detection.
+- **Implementation:** 
+    - `_agents/skills/site-hygiene/SKILL.md` (Defines the reasoning logic for the agent to identify malicious titles and spam keywords).
 
 ### Module 3: The Librarian
-Specialized tooling to find, verify, and recover official resource replacements from CDNs or web archives when internal links fail.
+**Recovery Layer:** Tooling to find and verify official resource replacements.
+- **Implementation:** 
+    - `_agents/skills/site-hygiene/references/site-hygiene-guide.md` (Provides the "Asset Recovery" playbook for the agent).
+    - `remediation_assets/` (Local storage for recovered legacy assets).
 
 ### Module 4: The Communicator
-Automated incident reporting and remediation memos designed for non-technical staff and web administrators.
+**Reporting Layer:** Incident reporting and synthesis for stakeholders.
+- **Implementation:** 
+    - Agentic output of structured **Remediation Memos** (documented in `SKILL.md`).
 
 ---
 

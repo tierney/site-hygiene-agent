@@ -1,4 +1,5 @@
 #!/bin/bash
+# Module: The Scout
 
 # audit-links.sh
 # Usage: ./audit-links.sh <url> <pattern>

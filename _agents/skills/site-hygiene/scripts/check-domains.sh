@@ -1,4 +1,5 @@
 #!/bin/bash
+# Module: The Scout
 
 # check-domains.sh
 # Usage: ./check-domains.sh <domain>
