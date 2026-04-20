@@ -1,0 +1,34 @@
+{
+  "project": "Site-Hygiene-Agent",
+  "version": "1.0.0",
+  "ground_truth": {
+    "malicious_redirects": [
+      {
+        "id": "MR_001",
+        "description": "Legacy domain hijacked by gambling spam",
+        "input_url": "http://legacy-org-online.test/care",
+        "expected_redirect": "http://spam-domain.ind/togel",
+        "expected_title_pattern": "togel|toto|gambling",
+        "required_classification": "MALICIOUS"
+      }
+    ],
+    "asset_recovery": [
+      {
+        "id": "AR_001",
+        "description": "Recovering a lost PDF from a verified third-party CDN",
+        "missing_file": "organizational_handbook_v1.pdf",
+        "verified_domains": ["archive.org", "verified-cdn.org", "github.com"],
+        "expected_status": "RECOVERED"
+      }
+    ],
+    "structural_gaps": [
+      {
+        "id": "SG_001",
+        "description": "Legacy CMS path (Drupal) mapping",
+        "path_pattern": "/sites/default/files/",
+        "target_platform": "WordPress",
+        "expected_remediation": "301 Redirect to /wp-content/uploads/"
+      }
+    ]
+  }
+}

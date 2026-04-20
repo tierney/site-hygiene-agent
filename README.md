@@ -6,7 +6,7 @@ The **Site-Hygiene-Agent** is an autonomous framework designed to maintain the d
 Traditional tools stop at "Broken Link." The **Site-Hygiene-Agent** executes a deeper investigative cycle:
 
 1.  **Observational Discovery:** Periodically crawls and monitors for non-200 status codes or cross-domain redirects.
-2.  **Semantic Analysis:** Uses LLM vision and text analysis to determine if the destination content matches the organization's mission (e.g., identifying "Indonesian Gambling" on a "Men's Ministry" path).
+2.  **Semantic Analysis:** Uses LLM vision and text analysis to determine if the destination content matches the organization's mission (e.g., identifying "Malicious Gambling" on a "Specific Ministry" path).
 3.  **Root Cause Attribution:** Differentiates between a server-side 404, a structural structural breakage (like legacy Drupal paths), and a "Zombie Domain" (expired secondary domains).
 4.  **Remediation Synthesis:** 
     *   Generates `wp-cli` or `terminus` commands for database-level search/replace.
@@ -78,17 +78,16 @@ The agent will then:
 
 The repository includes a comprehensive testing and evaluation suite to verify agent performance.
 
-### 1. Evaluation Scenarios (`tests/eval.yaml`)
-We use `eval.yaml` to define the agent's **"Hygiene IQ."** Success is not just finding a broken link, but performing the full investigative loop:
+### 1. Data-Based Evaluation (`tests/eval_manifest.json`)
+We use a **Ground Truth Manifest** to mathematically verify the agent's performance. This ensures that the agent is measured against "Known Bad" scenarios:
+- **Malicious Patterns:** Verifies that the agent correctly flags specific spam keywords (e.g., `togel`, `gambling`) in destination page titles.
+- **Structural Mapping:** Verifies detection of legacy CMS paths (e.g., `/sites/default/files/`).
+- **Asset Verification:** Sets the criteria for what constitutes a "Verified Domain" for asset recovery.
 
-- **Recall:** Did the agent find the specific vulnerability (e.g., a legacy path)?
-- **Classification:** Did the agent correctly distinguish between a server error and a malicious redirect (Semantic Analysis)?
-- **Remediation Efficacy:** Did the agent find a valid replacement for a 404 (Asset Recovery)?
-
-### 2. Unit Tests
-Run the Python test suite to verify the logic of the supporting shell scripts:
+### 2. Evaluation Runner
+Run the data-based evaluation suite to see the agent's logic verified against the manifest:
 ```bash
-python3 tests/test_audit_logic.py
+python3 tests/run_evals.py
 ```
 
 ---
@@ -97,10 +96,10 @@ python3 tests/test_audit_logic.py
 This agent is designed with a **Human-in-the-loop (HITL)** architecture. It synthesizes remediations—including database commands and email drafts—but requires administrative approval before execution. This ensures that automated cleanup doesn't accidentally break mission-critical legacy paths or sensitive content.
 
 ## Measuring "Hygiene IQ"
-When running an evaluation, we look for the following "Green" indicators:
-1. **Semantic Insight:** The agent flags a redirect to a gambling site as "Malicious" rather than "200 OK."
-2. **Contextual Awareness:** The agent identifies links in YouTube headers that standard crawlers miss.
-3. **Actionable Output:** The agent provides a `terminus` or `wp search-replace` command instead of just a list of bad URLs.
+When running an evaluation, we look for the following **Data-Based Indicators**:
+1. **Semantic Precision:** The agent correctly identifies the classification (e.g., "MALICIOUS") defined in the manifest.
+2. **Path Awareness:** The agent correctly identifies structural patterns defined in the ground truth.
+3. **Recovery Accuracy:** The agent sources replacements only from domains listed in the "Verified Domains" whitelist.
 
 ## Visualizing the Loop
 The **Antigravity** orchestration follows this cycle:
