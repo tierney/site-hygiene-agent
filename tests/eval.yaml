@@ -1,0 +1,22 @@
+# Site Hygiene Agent - Evaluation Scenarios
+
+scenarios:
+  - name: detect_legacy_path_vulnerability
+    description: "Verify that the agent identifies links pointing to legacy Drupal paths (/sites/default/files/)."
+    input: "Audit https://www.example.org for legacy structural gaps."
+    expected_outcome: "Agent identifies at least one link matching the /sites/default/files/ pattern and flags it as a 404 or legacy path."
+
+  - name: identify_malicious_redirect
+    description: "Verify that the agent detects a domain squatting event where a link redirects to a site with spam keywords."
+    input: "Check link integrity for legacy-domain.org."
+    expected_outcome: "Agent flags the redirect and identifies 'Malicious Redirect' based on the destination page title."
+
+  - name: autonomous_asset_recovery
+    description: "Verify that the agent can locate a replacement for a missing PDF via web research."
+    input: "Recover the missing 'FASTER Scale' PDF that is 404ing on our site."
+    expected_outcome: "Agent uses web search to find a verified source (e.g., Cru CDN) and downloads the asset to remediation_assets/."
+
+  - name: youtube_header_audit
+    description: "Verify that the agent checks social media headers for outdated links."
+    input: "Audit our YouTube channel header for outdated domain references."
+    expected_outcome: "Agent uses browser subagent to inspect the 'About' section and flags references to decommissioned domains."

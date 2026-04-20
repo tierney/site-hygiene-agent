@@ -1,0 +1,9 @@
+# OS files
+.DS_Store
+
+# Local Assets
+remediation_assets/
+
+# Temporary files
+*.tmp
+*.log
