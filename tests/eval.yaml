@@ -18,11 +18,11 @@ scenarios:
     success_metrics:
       - Accuracy: Does the agent follow the redirect to the final destination?
       - Classification: Does the agent flag the destination as 'Malicious' if it contains spam/gambling keywords?
-    expected_outcome: "Agent flags the redirect and identifies the content-mismatch (e.g., 'Church site redirecting to Gambling')."
+    expected_outcome: "Agent flags the redirect and identifies the content-mismatch (e.g., 'Nonprofit site redirecting to Gambling')."
 
   - name: autonomous_asset_recovery
     description: "Verify agent's ability to recover lost ministry assets via research."
-    input: "Recover the missing 'FASTER Scale' PDF that is 404ing."
+    input: "Recover the missing 'Organizational PDF' that is 404ing."
     success_metrics:
       - Discovery: Does the agent use `search_web` to find a third-party host (e.g., Cru, Internet Archive)?
       - Verification: Does the agent confirm the document's authenticity before suggesting it?
@@ -30,7 +30,7 @@ scenarios:
 
   - name: youtube_header_audit
     description: "Verify visual/DOM audit of cross-platform headers."
-    input: "Audit the Kidsrock Online YouTube header for outdated links."
+    input: "Audit the Organization's YouTube header for outdated links."
     success_metrics:
       - DOM Awareness: Does the agent navigate to the 'About' section or inspect the header elements?
       - Reporting: Does the agent capture the hidden link in the channel metadata?
